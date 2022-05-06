@@ -1,14 +1,16 @@
 <%@ page import="entity.User"%>
+<%@ page import="entity.Utility"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	//request.setCharacterEncoding("UTF-8");
-	String userId = request.getParameter("userId");
-	String userName = request.getParameter("userName");
-	String ageS = request.getParameter("age");
-	String btn = request.getParameter("btn");
-	
-	String result ="";
+request.setCharacterEncoding("UTF-8");
+String userId = request.getParameter("userId");
+String userName = request.getParameter("userName");
+String ageS = request.getParameter("age");
+String btn = request.getParameter("btn");
+
+String result = "";
+
 
 %>
 <!DOCTYPE html>
@@ -40,6 +42,57 @@ a.button {
 <body>
 
 	<h1>Java応用 - 演習問題1(発展)</h1>
+<%
+	String msg ="";
+	if (btn != null && btn.equals("reset")) {
+		session.invalidate();
+			
+	}else{
+
+	if (Utility.isNullOrEmpty(userId) == false && Utility.isNullOrEmpty(userName) == false
+		&& Utility.isNullOrEmpty(ageS) == false) {
+			
+		int age = Integer.parseInt(ageS);
+		String[] userInfo;
+		int i = 0;
+		
+		if (session.getAttribute("userInfo") != null) {
+			userInfo = (String[]) session.getAttribute("userInfo");
+				
+		} else {
+			userInfo = new String[5];
+		}
+
+			
+		if (userInfo[userInfo.length -1] != null) {
+			result = "これ以上ユーザーを登録できません。";
+			for (i = 0; i < userInfo.length; i++) {
+				msg = msg + userInfo[i] +"<br>";
+			}
+				
+		} else if (userInfo[userInfo.length - 1] == null) {
+
+			for (i = 0; i < userInfo.length; i++) {
+				
+				if (userInfo[i] != null) {
+					msg = msg + userInfo[i] +"<br>";
+
+					} else {
+						User user = new User(userName, userId, age);
+						String res = user.returnUserInfo();
+						userInfo[i] = res;
+						session.setAttribute("userInfo", userInfo);
+						msg = msg + userInfo[i] +"<br>";
+						result = "ユーザーを登録しました";
+						break;
+					}
+				}
+
+			}
+		}
+			
+	}
+%>
 
 	<h2>登録結果</h2>
 
@@ -51,49 +104,8 @@ a.button {
 	<p>
 
 		<span>現在の登録ユーザー</span><br>
-
-		<%
-		String msg;
-    	
-    	
-    	if ((userName != null || !userName.isEmpty()) && (userId != null || !userId.isEmpty()) && (ageS != null || !ageS.isEmpty())){
-    		
-    		String [] userInfo;
-    		userInfo = new String [4];
-    		int age = Integer.parseInt(ageS);
-    		
-    		if (session.getAttribute("userInfo[]") != null){
-    			userInfo = (String [])session.getAttribute("userInfo[]");
-    		}
-    		
-    		int i =0;
-    		
-    		if (userInfo[userInfo.length-1] != null){
-    			result = "これ以上ユーザーを登録できません。";
-    		}else if (userInfo[userInfo.length-1] == null){
-    		
-    			for (i = 0; i < userInfo.length; i++){
-    				if (userInfo[i] == null){
-    					User user = new User(userName, userId, age);
-    					String res = user.returnUserInfo();
-    					userInfo[i] = res;
-    	    			session.setAttribute("userInfo[]",userInfo);
-    	    			result ="ユーザーを登録しました";
-    	    			break;
-    				}else {
-    					msg = userInfo[i];
-    					out.println(msg);
-    					out.println("<br>");
-    				}
-    			}
-    		}
-    		
-    	}
-    
-    	if (btn!= null && btn.equals("reset")) {
-    		session.invalidate();
-        }
-    %>
+	<%= msg %>
+		
 	</p>
 
 	<form action="input.jsp">

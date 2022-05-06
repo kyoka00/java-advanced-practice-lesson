@@ -22,7 +22,13 @@ body {
     text-align: right;
 }
 </style>
-<% request.setCharacterEncoding("UTF-8"); %>
+<% request.setCharacterEncoding("UTF-8");
+
+String btn = request.getParameter("btn");
+if (btn != null && btn.equals("reset")) {
+	session.invalidate();
+}
+%>
 </head>
 <body>
 
@@ -31,7 +37,6 @@ body {
   <h2>ユーザー登録</h2>
 
   <span>登録するユーザー(最大5件)の情報を入力してください</span>
-
   <form action="result.jsp" method="post">
 
     <div class="box">
