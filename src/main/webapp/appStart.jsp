@@ -5,17 +5,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-<%
-    request.setCharacterEncoding("UTF-8");
-    String name = request.getParameter("name");
-
-    String result = "未実施";
-
-    if (name != null && !name.isEmpty()) {
-    	app.GameApp gameApp1 = new app.GameApp ("テトリス");
-    	result = gameApp1.start(name);
-    }
-%>
+  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,12 +31,18 @@ body {
 
   <h2>ゲームアプリ実行ページ</h2>
 
-  <div class="result">
-    <h3>アプリの実行結果</h3>
-    <p><%=result%></p>
-  </div>
+ 
+    
+    <c:if test="${not empty result}">
+     <div class="result">
+    	<h3>アプリの実行結果</h3>
+		<p><c:out value = "${result}"/></p>
+	 </div>
+	</c:if>
+   
 
-  <form action="appStart.jsp" method="post">
+
+  <form action="StartAppServlet" method="post">
     <label>ユーザ名：</label>
     <input type="text" name="name">
     <br>
