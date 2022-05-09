@@ -22,6 +22,7 @@ body {
   display: inline-block;
   margin: 5px;
   padding: 10px;
+  
 }
 </style>
 </head>
