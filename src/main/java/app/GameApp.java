@@ -9,8 +9,8 @@ public class GameApp {
 	public GameApp() {
 		
 	}
-	public String start(String a) {
-		String result =(a +"さんと" + this.item + "でゲームを開始します。");
+	public String start(String person) {
+		String result =(person +"さんとアプリで" + this.item + "を開始します。");
 		return result;
 	}
 }
