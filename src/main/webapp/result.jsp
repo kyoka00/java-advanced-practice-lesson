@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
+ <% String info = (String)request.getAttribute("info"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,7 @@ a.button {
 
   <h2>登録結果</h2>
 
-  <p>${info}</p>
+  <p>${requestScope.info }</p>
 
   <a href="input.jsp">戻る</a>
 

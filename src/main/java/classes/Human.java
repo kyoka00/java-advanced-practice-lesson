@@ -1,4 +1,4 @@
-
+package classes;
 /**
  * Humanクラス
  */
@@ -15,7 +15,7 @@ public class Human {
         name = "名無し";
         language = "不明";
     }
-
+    
     /**
      * コンストラクタ (受け取った引数を元に初期値をセット)
      */
@@ -23,11 +23,11 @@ public class Human {
         // フィールドを初期化
         this();
 
-        if (!Utility.isNullOrEmpty(name)) {
+        if (!Util.Utility.isNullOrEmpty(name)) {
             this.name = name;
         }
 
-        if (!Utility.isNullOrEmpty(language)) {
+        if (!Util.Utility.isNullOrEmpty(language)) {
             this.language = language;
         }
     }
