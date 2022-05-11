@@ -22,28 +22,29 @@ body {
     text-align: right;
 }
 </style>
-<% request.setCharacterEncoding("UTF-8");
-
-String btn = request.getParameter("btn");
-if (btn != null && btn.equals("reset")) {
-	session.invalidate();
-}
+<% 
+request.setCharacterEncoding("UTF-8");
+String idNull = (String) request.getAttribute("idNull");
+String passNull = (String) request.getAttribute("passNull");
+String unmatch =(String)request.getAttribute("unmatch");
 %>
 </head>
 <body>
 
-  <h1>Java応用 - 演習問題1(発展)</h1>
 
-  <h2>ユーザー登録</h2>
 
-  <span>登録するユーザー(最大5件)の情報を入力してください</span>
-  <form action="result.jsp" method="post">
+  <h2>＜login.jsp＞　ログイン画面</h2>
+
+ 
+  <form action="LoginServlet" method="post">
 
     <div class="box">
-      <label>ユーザID：</label> <input type="text" name="userId"> <br>
-      <label>ユーザ名：</label> <input type="text" name="userName"> <br>
-      <label>年齢：</label> <input type="number" min="0" max="120"
-        name="age">
+    <span>${requestScope.unmatch}</span><br>
+      <label>ID：</label> <input type="text" name="id"> 
+      <span>${requestScope.idNull }</span><br>
+      <label>PASS：</label> <input type="text" name="pass">
+      <span>${requestScope.passNull}</span><br>
+      
     </div>
     <button type="submit">登録</button>
   </form>

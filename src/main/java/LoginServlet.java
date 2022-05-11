@@ -38,26 +38,30 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
-		int check = 0;
 		String correctId= "axiz";
 		String correctPass="axizuser";
+		String idNull ="IDは必須です";
+		String passNull = "PASSは必須です";
+		request.setAttribute("idNull","");
+		request.setAttribute("passNull","");
+		request.setAttribute("unmatch","");
 		
 		if (Utility.isNullOrEmpty(id) && Utility.isNullOrEmpty(pass)) {
-			check =1;
-			request.setAttribute("check",check);
+			
+			request.setAttribute("idNull",idNull);
+			request.setAttribute("passNull",passNull);
 			
 		}else if (Utility.isNullOrEmpty(id)) {
-			check =2;
-			request.setAttribute("check",check);
+			
+			request.setAttribute("idNull",idNull);
 
 		}else if (Utility.isNullOrEmpty(pass)) {
-			check =3;
-			request.setAttribute("check",check);
+			
+			request.setAttribute("passNull",passNull);
 			
 		}else {
 			if (!id.equals(correctId) && !pass.equals(correctPass)) {
-				check =4;
-				request.setAttribute("check",check);
+				request.setAttribute("unmatch","IDまたはPASSが間違っています");
 				
 			}else {
 				request.getRequestDispatcher("/result.jsp").forward(request, response);
