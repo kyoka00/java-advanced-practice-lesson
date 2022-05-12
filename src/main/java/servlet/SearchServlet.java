@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Util.Utility;
+
 /**
  * Servlet implementation class StartAppServlet
  */
@@ -28,8 +30,19 @@ public class SearchServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	String english = request.getParameter("english");
+    	String result;
     	
-    	// ここに必要な処理を記述してください。
+    	if(Utility.isNullOrEmpty(english) == false) {
+    		Dictionary dictionary = new Dictionary();
+    		if(Utility.isNullOrEmpty(dictionary.searchDictionary(english))==false){
+    			result =dictionary.searchDictionary(english);
+    			request.setAttribute("result", result);
+    		}else {
+    			result="見つかりませんでした";
+    			request.setAttribute("result", result);
+    		}
+    	}
 
         request.getRequestDispatcher("dictionary.jsp").forward(request, response);
     }
