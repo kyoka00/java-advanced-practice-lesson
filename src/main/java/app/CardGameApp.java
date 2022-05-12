@@ -3,15 +3,15 @@ package app;
 public class CardGameApp extends GameApp{
 	public CardGameApp() {
 		super();
-		this.item = "トランプ";
+		setItem("トランプ");
 	}
 	public CardGameApp(String item) {
 		super(item);
-		
+		setPlayTime(5);
 	}
 	
 	@Override
-	public String play() {
+	protected String play() {
 		return "ババ抜きを行います。";
 	}
 }
