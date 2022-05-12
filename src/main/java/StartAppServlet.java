@@ -44,20 +44,25 @@ public class StartAppServlet extends HttpServlet {
 	    String name = request.getParameter("name");
 	    String app = request.getParameter("app");
 	    String result;
+	    int playTime;
 	    
 	    if (name != null && !name.isEmpty()) {
 	    	
 	    	 switch(app) {
 	 	    case "card":
-	 	    	app.CardGameApp card = new CardGameApp();
+	 	    	app.CardGameApp card = new CardGameApp("トランプ");
 	 	    	result = card.start(name);
 	 	    	request.setAttribute("result",result);
+	 	    	playTime = card.getPlayTime();
+	 	    	request.setAttribute("playTime",playTime);
 	 	    	break;
 	 	    	
 	 	    case "darts":
-	 	    	app.DartsGameApp darts = new DartsGameApp();
+	 	    	app.DartsGameApp darts = new DartsGameApp("ダーツ");
 	 	    	result = darts.start(name);
 	 	    	request.setAttribute("result",result);
+	 	    	playTime = darts.getPlayTime();
+	 	    	request.setAttribute("playTime",playTime);
 	 	    	break;
 	 	    	
 	 	    case "clock":

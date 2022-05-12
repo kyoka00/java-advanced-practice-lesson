@@ -38,6 +38,9 @@ body {
      <div class="result">
     	<h3>アプリの実行結果</h3>
 		<p><c:out value = "${result}"/></p>
+		<c:if test ="${not empty playTime }">
+		<p>実行時間：<c:out value ="${playTime }"/>分</p>
+		</c:if>
 	 </div>
 	</c:if>
    
