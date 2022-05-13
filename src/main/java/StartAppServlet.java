@@ -48,9 +48,9 @@ public class StartAppServlet extends HttpServlet {
 	    
 	    if (name != null && !name.isEmpty()) {
 	    	
-	    	 switch(app) {
+	    	switch(app) {
 	 	    case "card":
-	 	    	app.CardGameApp card = new CardGameApp("トランプ");
+	 	    	CardGameApp card = new CardGameApp("トランプ");
 	 	    	result = card.start(name);
 	 	    	request.setAttribute("result",result);
 	 	    	playTime = card.getPlayTime();
@@ -58,7 +58,7 @@ public class StartAppServlet extends HttpServlet {
 	 	    	break;
 	 	    	
 	 	    case "darts":
-	 	    	app.DartsGameApp darts = new DartsGameApp("ダーツ");
+	 	    	DartsGameApp darts = new DartsGameApp("ダーツ");
 	 	    	result = darts.start(name);
 	 	    	request.setAttribute("result",result);
 	 	    	playTime = darts.getPlayTime();
@@ -66,7 +66,7 @@ public class StartAppServlet extends HttpServlet {
 	 	    	break;
 	 	    	
 	 	    case "clock":
-	 	    	app.ClockApp clock = new ClockApp();
+	 	    	ClockApp clock = new ClockApp();
 	 	    	result = clock.start(name);
 	 	    	request.setAttribute("result",result);
 	 	    	break;
