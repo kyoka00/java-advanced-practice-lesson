@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Animal.Animal;
+import Animal.Cat;
 import Animal.Rabbit;
 
 /**
@@ -50,25 +51,18 @@ public class ImportServlet extends HttpServlet {
          */
 
         // todo:入力値取得
-    	String kinds = request.getParameter("name");
+    	String data = request.getParameter("data");
 
         // 取り込んだ内容を保持するための変数(オブジェクト)
-        Animal animal = null;
-
+    	Animal animal = null;
+        String result = "";
         // todo:
         // オブジェクトを作成し、上記の変数にセット
-        if (kinds != null && kinds.equals("")) {
-        	if (kinds.equals("cat")) {
-        		//Animal cat = new Animal()
-        	}else if(kinds.equals("rabbit")){
-        		Animal rabbit = new Rabbit("rabbit", 1);
-        	}
-        }
-        // 選択したデータに応じて、作成するオブジェクトが異なる
-
-        // 結果画面に表示するメッセージ用の変数
-        String result = "";
-
+        if (data.equals("cat")) { 
+        		animal = new Cat();
+        	}else if(data.equals("rabbit")) {
+        		 animal = new Rabbit();
+        	
         // 取り込むファイル先用の変数
         Path file = Paths.get(animal.getFilePath());
 
@@ -82,52 +76,38 @@ public class ImportServlet extends HttpServlet {
             // ファイル内の最初の1行を読み込み
             String text = br.readLine();
 
-            // 行数保持用の変数
-            // (値が0の場合、まだ読み込んでいない or 読み込み内容がないと判断)
             int count = 0;
 
-            // ファイル内の中身を1行ずつ読み込み、
-            // 読み込み内容が無くなるまで(textの値がnullになるまで)
-            // 読み込みを繰り返す
             while (text != null) {
-                // todo:行数加算
-
-                // todo:
-                // 変数animalのフィールドに読み込んだ内容をセット
-                // 現在の行数(count)に応じて、セットするフィールドが異なる
-
+                
+            	if (count == 1) {
+            		animal.name= text;
+            	}else if(count == 2){
+            		int age = Integer.parseInt(text);
+            		animal.age = age;
+            	}
                 // ファイル内の次の1行を読み込み
                 text = br.readLine();
             }
 
-            // todo:
-            // 変数animalのintroduceメソッドで表示する内容を取得し、
-            // 変数resultにセット
+           
+            	result = animal.introduce();
 
-
-            // ファイルの読み込みに失敗した場合、例外が発生するので、
-            // 「IOException」という型でcatchする
         } catch (IOException e) {
-            // todo:
-            // ファイルの読み込みに失敗した時のメッセージを
-            // 変数resultにセット
+            
+        	result = "ファイルの読み込みに失敗しました";
 
         } finally {
-            // 読み込んだファイルを閉じる
-            // (finally句でこの処理を行うのは、
-            // ファイルの読み込みが途中で失敗したとしても、
-            // 問題なく処理が行えたとしても、
-            // 開いたファイルを確実に閉じるため。
-            // これをしないとファイルがずっと開きっぱなしに
-            // なってしまう可能性がある)
+            
             if (br != null) {
                 br.close();
             }
         }
 
         // todo:結果画面に表示するメッセージをセット
-
+        request.setAttribute("result", result);
         // 結果画面へ遷移
         request.getRequestDispatcher("result.jsp").forward(request, response);
     }
+}
 }
