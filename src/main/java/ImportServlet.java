@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Animal.Animal;
+import Animal.Rabbit;
+
 /**
  * Servlet implementation class StartAppServlet
  */
@@ -47,12 +50,20 @@ public class ImportServlet extends HttpServlet {
          */
 
         // todo:入力値取得
+    	String kinds = request.getParameter("name");
 
         // 取り込んだ内容を保持するための変数(オブジェクト)
         Animal animal = null;
 
         // todo:
         // オブジェクトを作成し、上記の変数にセット
+        if (kinds != null && kinds.equals("")) {
+        	if (kinds.equals("cat")) {
+        		//Animal cat = new Animal()
+        	}else if(kinds.equals("rabbit")){
+        		Animal rabbit = new Rabbit("rabbit", 1);
+        	}
+        }
         // 選択したデータに応じて、作成するオブジェクトが異なる
 
         // 結果画面に表示するメッセージ用の変数
