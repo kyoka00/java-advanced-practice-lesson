@@ -60,9 +60,10 @@ public class ImportServlet extends HttpServlet {
         // オブジェクトを作成し、上記の変数にセット
         if (data.equals("cat")) { 
         		animal = new Cat();
-        	}else if(data.equals("rabbit")) {
+        		
+        }else if(data.equals("rabbit")) {
         		 animal = new Rabbit();
-        	
+        }
         // 取り込むファイル先用の変数
         Path file = Paths.get(animal.getFilePath());
 
@@ -79,10 +80,12 @@ public class ImportServlet extends HttpServlet {
             int count = 0;
 
             while (text != null) {
-                
+                count ++;
             	if (count == 1) {
             		animal.name= text;
+            		
             	}else if(count == 2){
+            		
             		int age = Integer.parseInt(text);
             		animal.age = age;
             	}
@@ -110,4 +113,4 @@ public class ImportServlet extends HttpServlet {
         request.getRequestDispatcher("result.jsp").forward(request, response);
     }
 }
-}
+

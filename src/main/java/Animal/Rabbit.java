@@ -31,7 +31,7 @@ public class Rabbit extends Animal{
 			humanAge = "60歳以上";
 			break;
 		}
-		String msg ="種類はウサギです。人間でいうと"+ humanAge + "です";
+		String msg ="種類はウサギです。人間でいうと"+ humanAge + "です。";
 		return msg;
 	}
 	

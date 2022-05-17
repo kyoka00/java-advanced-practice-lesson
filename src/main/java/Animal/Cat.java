@@ -3,7 +3,7 @@ package Animal;
 public class Cat extends Animal{
 	public Cat(){
 		super();
-
+		
 	}
 	@Override
 	public String introduceAge() {
@@ -32,7 +32,7 @@ public class Cat extends Animal{
 			break;
 		}
 		String msg ="種類はネコです。人間で言うと、"+ humanAge + "です。";
-		return "";
+		return msg;
 	}
 	
 	@Override
