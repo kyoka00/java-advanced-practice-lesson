@@ -2,7 +2,7 @@
   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
+<%@ page import="jp.co.axiz.entity.Car" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,35 +72,19 @@ body {
         <th>車体の色</th>
         <th>現在速度</th>
       </tr>
-
-
-      <!-- c:forEachについて
-           javaの拡張for文にあたるものである
-           items属性に配列やコレクションを指定する
-           var属性に配列などから取り出した値を保存する変数名を指定する(型の指定は不要)
-           ここでは、セッションに保存した変更履歴情報(ArrayList型)の
-           値(Carオブジェクト)を取り出し、
-           そのオブジェクトのゲッターメソッドを呼び、
-           車体の色、現在速度を表示する
-           ※テキストの補足説明を参照してください
-      -->
-
-      <!-- todo:
-           下記の<tr>～</tr>タグ部分の4行をc:forEachタグで囲み、
-           登録されている履歴の数だけ、その4行が繰り返し表示されるようにする
-           <td>タグで囲まれている部分を修正し、登録されている
-           履歴の情報(車体の色と現在速度)を表示する
-
-      -->
-
+<c:if test="${not empty history}">
+	<c:forEach var="car" items ="${history}">
 
       <tr>
-        <td>車体の色を表示</td>
-        <td>現在速度を表示</td>
+       <td>${car.getBodyColor()}</td>
+       <td>${car.getSpeed()}</td>
       </tr>
-
+      
+	</c:forEach>
+</c:if>	
   </table>
   </div>
+
 
   <h2>変更</h2>
 
