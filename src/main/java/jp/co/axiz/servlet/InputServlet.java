@@ -48,12 +48,26 @@ public class InputServlet extends HttpServlet {
         // 「input.jsp」からの入力値取得
         request.setCharacterEncoding("UTF-8");
         String productName = request.getParameter("productName");
-        String priceStr = request.getParameter("prise");
-
-        // 受け取った金額用の入力値を数値に変換
-        // (戻り値がnullの場合は、未入力とみなす)
-        Integer price = Integer.parseInt(priceStr);
-
+        //修正　総合テストNo.1による修正------------------------
+        //担当：前野 2020.05.21
+        //String priceStr = request.getParameter("prise");
+        String priceStr = request.getParameter("price");
+        //修正終わり--------------------------------------------
+        
+        
+        //修正　総合テストNo.3による修正------------------------
+        //担当：前野 2020.05.21
+        //Integer price = Integer.parseInt(priceStr);
+        Integer price;
+        if (Utility.isNullOrEmpty(priceStr)) {
+        	price = null;
+        }else {
+        	price = Utility.checkAndParseInt(priceStr);
+        }
+        //修正終わり----------------------------------------------
+        
+        
+        
         // 入力値が未入力かどうかの判定を行う
         // (商品名はUtilityクラスのisNullOrEmptyメソッドを使い、
         // 金額は上記で変換した値がnullかどうかで判定)

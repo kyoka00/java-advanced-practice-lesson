@@ -42,9 +42,13 @@ public class Product {
     public String getProductName() {
         return productName;
     }
-
+    
     public void setProductName(String productName) {
-        this.productName =  productClassification;
+    	//修正　総合テストNo.1による修正--------------------------
+    	//担当：前野　2020.05.21
+        //this.productName =  productClassification;
+    	this.productName = productName;
+    	//修正終わり-----------------------------------------------
     }
 
     public int getPrice() {

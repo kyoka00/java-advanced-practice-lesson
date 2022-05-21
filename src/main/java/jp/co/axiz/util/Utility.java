@@ -11,12 +11,16 @@ public class Utility {
      * @return
      */
     public static boolean isNullOrEmpty(String str) {
-
-        if (str == null && str.isEmpty()) {
+    	//修正 総合テストNo.3による修正---------------------------
+    	//担当：前野　2022.05.21
+    	//if (str == null && str.isEmpty()) {
+       if (str == null || str.isEmpty()) {
+    	//
             return true;
         } else {
             return false;
         }
+    	
     }
 
     /**
